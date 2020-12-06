@@ -22,9 +22,11 @@ namespace BookStoreMvc.Controllers
             return View();
         }
 
-        public List<BookModel> GetAllBooks()
+        public ViewResult GetAllBooks()
         {
-            return _bookRepository.GetAllBooks();
+            var data = _bookRepository.GetAllBooks();
+
+            return View();
         }
 
         public BookModel GetBook(int id)

@@ -6,6 +6,7 @@ namespace BookStoreMvc.Controllers
     {
         public ViewResult Index()
         {
+            ViewBag.HeaderTitle = "";
             return View();
         }
 

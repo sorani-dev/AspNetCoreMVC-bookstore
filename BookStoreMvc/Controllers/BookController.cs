@@ -1,10 +1,7 @@
 ﻿using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookStoreMvc.Controllers
 {
@@ -26,7 +23,7 @@ namespace BookStoreMvc.Controllers
         {
             var data = _bookRepository.GetAllBooks();
 
-            return View();
+            return View(data);
         }
 
         public BookModel GetBook(int id)

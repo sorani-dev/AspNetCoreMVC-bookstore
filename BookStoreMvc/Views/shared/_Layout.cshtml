@@ -37,13 +37,17 @@
                             <a class="nav-link text-dark" href="/home/ContactUs">Contact</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link text-dark" href="/book/getallbooks">All Books</a>
+                            <a class="nav-link text-dark" href="/book/getallbooks">All Books</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    @RenderSection("breadcrumb", required: false)
+
+
     <div>
         @RenderBody()
     </div>
@@ -56,10 +60,6 @@
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.js"></script>
 
-    <script>
-        $(document).ready(() => {
-            //alert("Page loaded");
-        })
-    </script>
+    @RenderSection("javascripts", required: false)
 </body>
 </html>

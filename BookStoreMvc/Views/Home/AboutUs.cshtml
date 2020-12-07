@@ -5,4 +5,15 @@
     Layout = "_Layout";
     ViewBag.Title = "About Us";
 }
-   <h1>This is the about page of the book store application</h1>
+
+@section breadcrumb {
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+        </ol>
+    </nav>
+}
+<h1>This is the about page of the book store application</h1>

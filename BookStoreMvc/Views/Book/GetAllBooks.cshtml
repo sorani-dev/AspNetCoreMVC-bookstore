@@ -5,6 +5,17 @@
     Layout = "_Layout";
     ViewBag.Title = "Get all books";
 }
+
+@section breadcrumb {
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Book</a></li>
+            <li class="breadcrumb-item active" aria-current="page">All Books</li>
+        </ol>
+    </nav>
+}
 <div class="container">
     <h3 class="display-4">All books</h3>
     <div class="row">

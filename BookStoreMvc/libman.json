@@ -9,6 +9,10 @@
     {
       "library": "twitter-bootstrap@4.5.3",
       "destination": "wwwroot/lib/twitter-bootstrap/"
+    },
+    {
+      "library": "popper.js@2.5.4",
+      "destination": "wwwroot/lib/poppersjs/"
     }
   ]
 }

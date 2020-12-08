@@ -26,6 +26,7 @@ namespace BookStoreMvc.Controllers
             return View(data);
         }
 
+        [Route("book-details/{id}", Name = "bookDetailsRoute")]
         public ViewResult GetBook(int id)
         {
             BookModel data = _bookRepository.GetBookById(id);

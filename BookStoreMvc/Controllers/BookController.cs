@@ -37,5 +37,17 @@ namespace BookStoreMvc.Controllers
         {
             return _bookRepository.SearchBook(bookName, authorName); // $"Book with name: {bookName} and author: {authorName}";
         }
+
+        public ViewResult AddNewBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult AddNewBook(BookModel bookModel)
+        {
+
+            return View();
+        }
     }
 }

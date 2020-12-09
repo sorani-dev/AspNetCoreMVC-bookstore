@@ -23,6 +23,7 @@ namespace BookStoreMvc.Repository
             {
                 Author = model.Author,
                 Title = model.Title,
+                Language = model.Language,
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
                 Description = model.Description,
                 CreatedOn = DateTime.UtcNow,

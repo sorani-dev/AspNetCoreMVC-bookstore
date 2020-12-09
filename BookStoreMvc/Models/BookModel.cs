@@ -4,10 +4,6 @@ namespace BookStoreMvc.Models
 {
     public class BookModel
     {
-
-        //[DataType(DataType.Date)]
-        //public string MyField { get; set; }
-
         public int Id { get; set; }
 
         [Required(ErrorMessage ="Please enter the title of your book")]
@@ -22,6 +18,7 @@ namespace BookStoreMvc.Models
 
         public string Category { get; set; }
 
+        [Required(ErrorMessage ="Please choose the language of the book")]
         public string Language { get; set; }
 
         [Required(ErrorMessage = "Please enter the number of pages of your book")]

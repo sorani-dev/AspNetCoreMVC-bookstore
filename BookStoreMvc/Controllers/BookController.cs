@@ -47,7 +47,7 @@ namespace BookStoreMvc.Controllers
                 Language = "French",
             };
 
-            ViewBag.Language = new SelectList(new List<string>() { "English", "French", "Spanish" });
+            ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -66,12 +66,20 @@ namespace BookStoreMvc.Controllers
                 }
             }
 
-            ViewBag.Language = new SelectList(new List<string>() { "English", "French", "Spanish" });
 
-            ModelState.AddModelError("", "This is my custom error message");
-            ModelState.AddModelError("", "This is my 2nd custom error message");
+            ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
 
             return View();
         }
+
+        private List<LanguageModel> GetLanguages()
+        {
+            return new List<LanguageModel>()
+            {
+                new LanguageModel() {Id = 1, Name="English"},
+                new LanguageModel() {Id = 2, Name="French"},
+                new LanguageModel() {Id = 3, Name="Spanish"},
+            };
+        }     
     }
 }

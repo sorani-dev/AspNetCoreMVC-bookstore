@@ -58,6 +58,9 @@ namespace BookStoreMvc.Controllers
                 }
             }
 
+            ModelState.AddModelError("", "This is my custom error message");
+            ModelState.AddModelError("", "This is my 2nd custom error message");
+
             return View();
         }
     }

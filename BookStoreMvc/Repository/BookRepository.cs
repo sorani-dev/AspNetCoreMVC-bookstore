@@ -1,4 +1,6 @@
-﻿using BookStoreMvc.Models;
+﻿using BookStoreMvc.Data;
+using BookStoreMvc.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +8,31 @@ namespace BookStoreMvc.Repository
 {
     public class BookRepository
     {
+        private BookStoreContext _context = null;
+
+        public BookRepository(BookStoreContext context)
+        {
+            this._context = context;
+        }
+
+        public int AddNewBook(BookModel model)
+        {
+            var newBook = new Book()
+            {
+                Author = model.Author,
+                Title = model.Title,
+                TotalPages = model.TotalPages,
+                Description = model.Description,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
+            };
+
+            _context.Books.Add(newBook);
+            _context.SaveChanges();
+
+            return newBook.Id;
+        }
+
         public List<BookModel> GetAllBooks()
         {
             return DataSource();

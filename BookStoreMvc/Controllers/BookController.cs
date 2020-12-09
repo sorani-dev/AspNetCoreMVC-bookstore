@@ -54,18 +54,14 @@ namespace BookStoreMvc.Controllers
             //    Value = x.Id.ToString(),
             //}).ToList();
 
-            var group1 = new SelectListGroup() { Name = "Group 1" };
-            var group2 = new SelectListGroup() { Name = "Group 2", Disabled=true };
-            var group3 = new SelectListGroup() { Name = "Group 3" };
-
             ViewBag.Language = new List<SelectListItem>() {
-                new SelectListItem(){Text="English", Value="1", Group=group1 },
-                new SelectListItem(){Text="French", Value="2",Group=group1 },
-                new SelectListItem(){Text="Spanish", Value="3" , Group=group1 },
-                new SelectListItem(){Text="Chinese", Value="4", Group=group2 },
-                new SelectListItem(){Text="Dutch", Value="5", Group=group3 },
-                new SelectListItem(){Text="Japanese", Value="6",  Group=group2},
-                new SelectListItem(){Text="Greek", Value="7",  Group=group3},
+                new SelectListItem(){Text="English", Value="1"},
+                new SelectListItem(){Text="French", Value="2"},
+                new SelectListItem(){Text="Spanish", Value="3"},
+                new SelectListItem(){Text="Chinese", Value="4"},
+                new SelectListItem(){Text="Dutch", Value="5"},
+                new SelectListItem(){Text="Japanese", Value="6"},
+                new SelectListItem(){Text="Greek", Value="7"},
             };
 
             ViewBag.IsSuccess = isSuccess;
@@ -86,7 +82,15 @@ namespace BookStoreMvc.Controllers
             }
 
 
-            ViewBag.Language = GetLanguages();
+            ViewBag.Language = new List<SelectListItem>() {
+                new SelectListItem(){Text="English", Value="1"},
+                new SelectListItem(){Text="French", Value="2"},
+                new SelectListItem(){Text="Spanish", Value="3"},
+                new SelectListItem(){Text="Chinese", Value="4"},
+                new SelectListItem(){Text="Dutch", Value="5"},
+                new SelectListItem(){Text="Japanese", Value="6"},
+                new SelectListItem(){Text="Greek", Value="7"},
+            };
 
             return View();
         }

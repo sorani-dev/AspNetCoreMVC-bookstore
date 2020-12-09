@@ -1,6 +1,7 @@
 ﻿using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -46,6 +47,8 @@ namespace BookStoreMvc.Controllers
                 Language = "French",
             };
 
+            ViewBag.Language = new SelectList(new List<string>() { "English", "French", "Spanish" });
+
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
             return View(model);
@@ -62,6 +65,8 @@ namespace BookStoreMvc.Controllers
                     return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
                 }
             }
+
+            ViewBag.Language = new SelectList(new List<string>() { "English", "French", "Spanish" });
 
             ModelState.AddModelError("", "This is my custom error message");
             ModelState.AddModelError("", "This is my 2nd custom error message");

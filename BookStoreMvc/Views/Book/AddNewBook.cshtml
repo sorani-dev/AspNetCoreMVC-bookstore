@@ -23,11 +23,11 @@
 
     <div class="form-group">
         <label asp-for="Language"></label>
-        <select asp-for="Language" class="form-control" required>
+        <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">
             <option value="">Please choose the book language</option>
-            <option value="English">English</option>
-            <option value="French">Français</option>
-            <option value="Spanish">Español</option>
+            @*<option value="English">English</option>*@
+            @*<option value="French">Français</option>*@
+            @*<option value="Spanish">Español</option>*@
         </select>
         <span asp-validation-for="Language" class="text-danger"></span>
     </div>

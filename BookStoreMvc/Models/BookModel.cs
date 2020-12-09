@@ -7,7 +7,7 @@ namespace BookStoreMvc.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage ="Please enter the title of your book")]
-        [StringLength(100, MinimumLength = 5)]
+        [StringLength(100, MinimumLength = 2)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Please enter the author of your book")]

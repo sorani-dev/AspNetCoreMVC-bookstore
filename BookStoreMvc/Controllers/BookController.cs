@@ -43,7 +43,7 @@ namespace BookStoreMvc.Controllers
         {
             var model = new BookModel()
             {
-                Language = "Français",
+                Language = "French",
             };
 
             ViewBag.IsSuccess = isSuccess;

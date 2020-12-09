@@ -3,6 +3,7 @@ using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStoreMvc.Controllers
@@ -44,10 +45,21 @@ namespace BookStoreMvc.Controllers
         {
             var model = new BookModel()
             {
-                Language = "French",
+                Language = "2",
             };
 
-            ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
+            //ViewBag.Language = GetLanguages().Select(x => new SelectListItem()
+            //{
+            //    Text = x.Name,
+            //    Value = x.Id.ToString(),
+            //}).ToList();
+
+            ViewBag.Language = new List<SelectListItem>() {
+                new SelectListItem(){Text="English", Value="1" },
+                new SelectListItem(){Text="French", Value="2", Selected=true },
+                new SelectListItem(){Text="Spanish", Value="3" , Disabled=true},
+                new SelectListItem(){Text="Chinese", Value="4", Disabled=true },
+            };
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -67,7 +79,7 @@ namespace BookStoreMvc.Controllers
             }
 
 
-            ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
+            ViewBag.Language = GetLanguages();
 
             return View();
         }

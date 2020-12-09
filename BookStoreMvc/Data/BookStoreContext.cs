@@ -16,5 +16,7 @@ namespace BookStoreMvc.Data
 
         public DbSet<Book> Books { get; set; }
 
+        public DbSet<Language> Languages { get; set; }
+
     }
 }

@@ -11,10 +11,12 @@ namespace BookStoreMvc.Controllers
     public class BookController : Controller
     {
         private readonly BookRepository _bookRepository = null;
+        private readonly LanguageRepository languageRepository;
 
-        public BookController(BookRepository bookRepository)
+        public BookController(BookRepository bookRepository, LanguageRepository languageRepository)
         {
             _bookRepository = bookRepository;
+            this.languageRepository = languageRepository;
         }
 
         public IActionResult Index()
@@ -41,11 +43,11 @@ namespace BookStoreMvc.Controllers
             return _bookRepository.SearchBook(bookName, authorName); // $"Book with name: {bookName} and author: {authorName}";
         }
 
-        public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
+        public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             var model = new BookModel()
             {
-                Language = "2",
+                //Language = "2",
             };
 
             //ViewBag.Language = GetLanguages().Select(x => new SelectListItem()
@@ -63,6 +65,7 @@ namespace BookStoreMvc.Controllers
             //    new SelectListItem(){Text="Japanese", Value="6"},
             //    new SelectListItem(){Text="Greek", Value="7"},
             //};
+            ViewBag.Language = new SelectList(await languageRepository.GetLanguages(), "Id", "Name");
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -81,28 +84,9 @@ namespace BookStoreMvc.Controllers
                 }
             }
 
-
-            //ViewBag.Language = new List<SelectListItem>() {
-            //    new SelectListItem(){Text="English", Value="1"},
-            //    new SelectListItem(){Text="French", Value="2"},
-            //    new SelectListItem(){Text="Spanish", Value="3"},
-            //    new SelectListItem(){Text="Chinese", Value="4"},
-            //    new SelectListItem(){Text="Dutch", Value="5"},
-            //    new SelectListItem(){Text="Japanese", Value="6"},
-            //    new SelectListItem(){Text="Greek", Value="7"},
-            //};
+            ViewBag.Language = new SelectList(await languageRepository.GetLanguages(), "Id", "Name");
 
             return View();
         }
-
-        private List<LanguageModel> GetLanguages()
-        {
-            return new List<LanguageModel>()
-            {
-                new LanguageModel() {Id = 1, Name="English"},
-                new LanguageModel() {Id = 2, Name="French"},
-                new LanguageModel() {Id = 3, Name="Spanish"},
-            };
-        }     
     }
 }

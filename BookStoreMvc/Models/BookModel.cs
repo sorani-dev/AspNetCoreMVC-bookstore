@@ -20,14 +20,12 @@ namespace BookStoreMvc.Models
 
         public string Category { get; set; }
 
-        [Required(ErrorMessage ="Please choose the language of the book")]
+        //[Required(ErrorMessage ="Please choose the language of the book")]
+        public int LanguageId { get; set; }
         public string Language { get; set; }
 
-        [Required(ErrorMessage = "Please choose the languages of the book")]
-        public List<string> MultiLanguage { get; set; }
-
-        [Required(ErrorMessage = "Please choose the languages of the book")]
-        public LanguageEnum LanguageEnum { get; set; }
+        //[Required(ErrorMessage = "Please choose the languages of the book")]
+        //public List<string> MultiLanguage { get; set; }
 
         [Required(ErrorMessage = "Please enter the number of pages of your book")]
         [Display(Name ="Total pages of the book")]

@@ -1,6 +1,4 @@
-﻿@using BookStoreMvc.Enum
-
-@model BookModel
+﻿@model BookModel
 @{
     ViewData["Title"] = "Add New Book";
 }
@@ -21,26 +19,26 @@
 
 <form method="post" asp-action="AddNewBook" asp-controller="Book">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+    
     <div class="form-group">
-        <!--<label asp-for="MultiLanguage"></label>
-    <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
-        <option value="">Please choose the book's languages</option>-->
-        @*<option value="English">English</option>*@
-        @*<option value="French">Français</option>*@
-        @*<option value="Spanish">Español</option>*@
-        <!--</select>
-    <span asp-validation-for="MultiLanguage" class="text-danger"></span>-->
-        <label asp-for="LanguageEnum"></label>
-        <select asp-for="LanguageEnum" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()" multiple>
-            <option value="">Please choose the book's languages</option>
+        <label asp-for="LanguageId"></label>
+        <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
+            <option value="">Please choose the book's language</option>
             @*<option value="English">English</option>*@
             @*<option value="French">Français</option>*@
-            @*<option value="Spanish">Español</option>*@
+            @*<option value="Spanish">Español</option> *@
         </select>
-        <span asp-validation-for="LanguageEnum" class="text-danger"></span>
+        <span asp-validation-for="LanguageId" class="text-danger"></span>
+       
+        @* <!--
+        <span asp-validation-for="MultiLanguage" class="text-danger"></span>-->
+            <label asp-for="LanguageEnum"></label>
+            <select asp-for="LanguageEnum" class="form-control" asp-items="Html.GetEnumSelectList<LanguageEnum>()" multiple>
+                <option value="">Please choose the book's languages</option>
+                </select>
+        *@
     </div>
-
+    
     <div class="form-group">
         <label asp-for="Title"></label>
         <input asp-for="Title" class="form-control" />

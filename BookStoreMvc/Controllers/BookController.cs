@@ -88,8 +88,10 @@ namespace BookStoreMvc.Controllers
                     folder += Guid.NewGuid().ToString() + "_" + bookModel.CoverPhoto.FileName;
                     string serverFolder = Path.Combine(webHostEnvironment.WebRootPath, folder);
 
+                    bookModel.CoverImageUrl = "/" + folder;
+
                     await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                }
+                    }
 
                 int id = await _bookRepository.AddNewBook(bookModel);
                 if (id > 0)

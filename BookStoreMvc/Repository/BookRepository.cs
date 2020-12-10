@@ -28,6 +28,7 @@ namespace BookStoreMvc.Repository
                 Description = model.Description,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
+                CoverImageUrl = model.CoverImageUrl,
             };
 
             await _context.Books.AddAsync(newBook);
@@ -49,6 +50,7 @@ namespace BookStoreMvc.Repository
                         Language = book.Language.Name,
                         Title= book.Title,
                         TotalPages= book.TotalPages,
+                        CoverImageUrl = book.CoverImageUrl,
                     }).ToListAsync();
         }
         public async Task<BookModel> GetBookById(int id)
@@ -64,6 +66,7 @@ namespace BookStoreMvc.Repository
                     Language = book.Language.Name,
                     Title = book.Title,
                     TotalPages = book.TotalPages,
+                    CoverImageUrl = book.CoverImageUrl,
                 }).FirstOrDefaultAsync();
         }
         public List<BookModel> SearchBook(string title, string authorName)

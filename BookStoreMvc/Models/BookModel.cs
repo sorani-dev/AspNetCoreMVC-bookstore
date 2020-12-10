@@ -9,9 +9,9 @@ namespace BookStoreMvc.Models
     {
         public int Id { get; set; }
 
-        //[Required(ErrorMessage ="Please enter the title of your book")]
-        //[StringLength(100, MinimumLength = 2)]
-        [MyCustomValidation("java", ErrorMessage ="My Error Message", Text ="java")]
+        [Required(ErrorMessage = "Please enter the title of your book")]
+        [StringLength(100, MinimumLength = 2)]
+        //[MyCustomValidation("java", ErrorMessage ="My Error Message", Text ="java")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Please enter the author of your book")]

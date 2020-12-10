@@ -23,6 +23,7 @@ namespace BookStoreMvc.Models
         public string Category { get; set; }
 
         //[Required(ErrorMessage ="Please choose the language of the book")]
+        [Display(Name = "Language of the book")]
         public int LanguageId { get; set; }
         public string Language { get; set; }
 

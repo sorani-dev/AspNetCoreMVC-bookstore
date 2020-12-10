@@ -444,3 +444,4 @@ $RECYCLE.BIN/
 BookStoreMvc/wwwroot/lib/
  
 /BookStoreMvc/wwwroot/books/cover
+/BookStoreMvc/wwwroot/books/gallery

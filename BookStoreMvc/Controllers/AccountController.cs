@@ -39,8 +39,9 @@ namespace BookStoreMvc.Controllers
                     return View(model);
                 }
                 ModelState.Clear();
+                return View();
             }
-            return View();
+            return View(model);
         }
     }
 }

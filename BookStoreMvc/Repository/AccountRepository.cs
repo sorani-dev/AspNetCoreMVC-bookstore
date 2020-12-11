@@ -10,17 +10,19 @@ namespace BookStoreMvc.Repository
 {
     public class AccountRepository : Controller, IAccountRepository
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public AccountRepository(UserManager<IdentityUser> userManager)
+        public AccountRepository(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
         }
 
         public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
         {
-            var user = new IdentityUser()
+            var user = new ApplicationUser()
             {
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
                 Email = userModel.Email,
                    UserName = userModel.Email,
             };

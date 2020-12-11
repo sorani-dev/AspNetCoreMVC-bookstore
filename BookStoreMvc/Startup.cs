@@ -28,7 +28,7 @@ namespace BookStoreMvc
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                 );
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookStoreContext>();
 
             services.AddControllersWithViews();

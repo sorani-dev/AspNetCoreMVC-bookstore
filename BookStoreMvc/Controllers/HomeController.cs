@@ -15,6 +15,8 @@ namespace BookStoreMvc.Controllers
         public ViewResult Index()
         {
             ViewBag.HeaderTitle = "";
+
+            var newBook = configuration.GetSection("NewBookAlert");
             var result = configuration["AppName"];
             var res = configuration.GetValue<bool>("DisplayNewBookAlert");
             var key1 = configuration["infoObj:key1"];

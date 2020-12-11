@@ -29,6 +29,7 @@ namespace BookStoreMvc.Repository
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
                 CoverImageUrl = model.CoverImageUrl,
+                BookPdfUrl = model.BookPdfUrl,
             };
 
             newBook.bookGallery = new List<BookGallery>();
@@ -83,7 +84,8 @@ namespace BookStoreMvc.Repository
                         Id = g.Id,
                         Name = g.Name,
                         URL = g.URL
-                    }).ToList()
+                    }).ToList(),
+                    BookPdfUrl = book.BookPdfUrl,
                 }).FirstOrDefaultAsync();
         }
         public List<BookModel> SearchBook(string title, string authorName)

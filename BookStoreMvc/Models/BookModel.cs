@@ -46,5 +46,12 @@ namespace BookStoreMvc.Models
         public IFormFileCollection GalleryFiles { get; set; }
 
         public List<GalleryModel> Gallery { get; set; }
+
+
+        [Display(Name = "Upload the book in PDF format")]
+        [Required]
+        public IFormFile BookPdf { get; set; }
+
+        public string BookPdfUrl { get; set; }
     }
 }

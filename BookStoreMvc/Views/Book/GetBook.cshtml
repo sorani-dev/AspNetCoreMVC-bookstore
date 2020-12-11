@@ -62,7 +62,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button class="btn btn-outline-primary">Read now</button>
+                        <a class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">Read now <span class="sr-only">the contents of the book "@Model.Title"</span></a>
                     </div>
                 </div>
 
@@ -73,12 +73,28 @@
                     <li class="list-group-item"><span class="font-weight-bold">Total pages - </span> @Model.TotalPages</li>
                     <li class="list-group-item"><span class="font-weight-bold">Language - </span> @Model.Language</li>
                 </ul>
-
-
             </div>
+        </div>
 
-
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @*<embed src="@Model.BookPdfUrl" class="w-100 min-vh-100"></embed>*@
+                        <iframe src="@Model.BookPdfUrl" class="w-100" style="height: 70vh;"></iframe>
+                    </div>
+                    <div class="modal-footer flex-row justify-content-between">
+                        <a href="@Model.BookPdfUrl" class="btn btn-outline-primary" target="_blank">Open <span class="sr-only">the current book: "@Model.Title"</span> in a new tab</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <hr />
 

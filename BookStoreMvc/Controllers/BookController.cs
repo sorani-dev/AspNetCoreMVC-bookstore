@@ -57,22 +57,6 @@ namespace BookStoreMvc.Controllers
                 //Language = "2",
             };
 
-            //ViewBag.Language = GetLanguages().Select(x => new SelectListItem()
-            //{
-            //    Text = x.Name,
-            //    Value = x.Id.ToString(),
-            //}).ToList();
-
-            //ViewBag.Language = new List<SelectListItem>() {
-            //    new SelectListItem(){Text="English", Value="1"},
-            //    new SelectListItem(){Text="French", Value="2"},
-            //    new SelectListItem(){Text="Spanish", Value="3"},
-            //    new SelectListItem(){Text="Chinese", Value="4"},
-            //    new SelectListItem(){Text="Dutch", Value="5"},
-            //    new SelectListItem(){Text="Japanese", Value="6"},
-            //    new SelectListItem(){Text="Greek", Value="7"},
-            //};
-            ViewBag.Language = new SelectList(await languageRepository.GetLanguages(), "Id", "Name");
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -120,9 +104,7 @@ namespace BookStoreMvc.Controllers
                 }
             }
 
-            ViewBag.Language = new SelectList(await languageRepository.GetLanguages(), "Id", "Name");
-
-            return View();
+           return View();
         }
 
         private async Task<string> UploadImage(string folderPath, IFormFile file)

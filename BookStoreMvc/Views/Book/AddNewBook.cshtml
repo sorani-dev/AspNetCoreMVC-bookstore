@@ -1,4 +1,7 @@
-﻿@model BookModel
+﻿@inject BookStoreMvc.Repository.ILanguageRepository languageRepository
+@model BookModel
+@using System.Collections.Generic;
+@using System.Linq;
 @{
     ViewData["Title"] = "Add New Book";
 }
@@ -28,7 +31,7 @@
 
         <div class="form-group">
             <label asp-for="LanguageId"></label>
-            <select asp-for="LanguageId" class="form-control" asp-items="ViewBag.Language">
+            <select asp-for="LanguageId" class="form-control" asp-items="(await languageRepository.GetLanguages()).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() })">
                 <option value="">Please choose the book's language</option>
             </select>
             <span asp-validation-for="LanguageId" class="text-danger"></span>

@@ -126,5 +126,10 @@ namespace BookStoreMvc.Repository
                 new BookModel(){Id=6, Title="Azure DevOps", Author="Azure Team", Description="This is the description of the Azure DevOps book", Category="DevOps", Language="French", TotalPages=701, },
             };
         }
+
+        public string GetAppName()
+        {
+            return "Book store application";
+        }
     }
 }

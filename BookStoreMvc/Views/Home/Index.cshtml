@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Home";
 }
+@inject BookStoreMvc.Repository.IBookRepository bookRepository
 
 @section breadcrumb {
 
@@ -25,6 +26,11 @@
         <p>
             <a href="#" class="btn  btn-primary my-2">Search books</a>
         </p>
+
+        @foreach (var item in await bookRepository.GetAllBooks())
+        {
+            <h2>@item.Title</h2>
+        }
     </div>
 </section>
 

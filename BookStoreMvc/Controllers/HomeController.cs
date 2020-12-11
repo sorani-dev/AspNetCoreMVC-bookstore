@@ -16,6 +16,7 @@ namespace BookStoreMvc.Controllers
         {
             ViewBag.HeaderTitle = "";
             var result = configuration["AppName"];
+            var res = configuration.GetValue<bool>("DisplayNewBookAlert");
             var key1 = configuration["infoObj:key1"];
             var key2 = configuration["infoObj:key2"];
             var key3 = configuration["infoObj:key3:key3obj1"];

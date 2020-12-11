@@ -53,18 +53,38 @@ namespace BookStoreMvc.Repository
         {
             return await _context.Books
                 .Select(book => new BookModel()
-                    {
-                        Author = book.Author,
-                        Category = book.Category,
-                        Description = book.Description,
-                        Id = book.Id,
-                        LanguageId = book.LanguageId,
-                        Language = book.Language.Name,
-                        Title= book.Title,
-                        TotalPages= book.TotalPages,
-                        CoverImageUrl = book.CoverImageUrl,
-                    }).ToListAsync();
+                {
+                    Author = book.Author,
+                    Category = book.Category,
+                    Description = book.Description,
+                    Id = book.Id,
+                    LanguageId = book.LanguageId,
+                    Language = book.Language.Name,
+                    Title = book.Title,
+                    TotalPages = book.TotalPages,
+                    CoverImageUrl = book.CoverImageUrl,
+                }).ToListAsync();
         }
+
+
+
+        public async Task<List<BookModel>> GetTopBooksAsync()
+        {
+            return await _context.Books
+                .Select(book => new BookModel()
+                {
+                    Author = book.Author,
+                    Category = book.Category,
+                    Description = book.Description,
+                    Id = book.Id,
+                    LanguageId = book.LanguageId,
+                    Language = book.Language.Name,
+                    Title = book.Title,
+                    TotalPages = book.TotalPages,
+                    CoverImageUrl = book.CoverImageUrl,
+                }).Take(5).ToListAsync();
+        }
+
         public async Task<BookModel> GetBookById(int id)
         {
             return await _context.Books.Where(x => x.Id == id)

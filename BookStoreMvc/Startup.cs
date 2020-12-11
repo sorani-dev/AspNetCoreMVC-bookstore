@@ -44,6 +44,8 @@ namespace BookStoreMvc
 #endif
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+
             services.AddSingleton<IMessageRepository, MessageRepository>();
 
             services.Configure<NewBookAlertConfig>("InternalBook", configuration.GetSection("NewBookAlert"));

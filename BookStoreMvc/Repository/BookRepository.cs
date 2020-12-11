@@ -1,6 +1,7 @@
 ﻿using BookStoreMvc.Data;
 using BookStoreMvc.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace BookStoreMvc.Repository
     public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context = null;
+        private readonly IConfiguration configuration;
 
-        public BookRepository(BookStoreContext context)
+        public BookRepository(BookStoreContext context, IConfiguration configuration)
         {
             this._context = context;
+            this.configuration = configuration;
         }
 
         public async Task<int> AddNewBook(BookModel model)
@@ -129,7 +132,7 @@ namespace BookStoreMvc.Repository
 
         public string GetAppName()
         {
-            return "Book store application";
+            return configuration["AppName"];
         }
     }
 }

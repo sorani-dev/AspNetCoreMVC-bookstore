@@ -3,6 +3,7 @@ using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,10 @@ namespace BookStoreMvc
             services.AddDbContext<BookStoreContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                 );
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreContext>();
+
             services.AddControllersWithViews();
 
 #if DEBUG            

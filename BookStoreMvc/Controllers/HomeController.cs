@@ -1,33 +1,34 @@
 ﻿using BookStoreMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace BookStoreMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration configuration;
+        private NewBookAlertConfig newBookAlertConfiguration;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IOptions<NewBookAlertConfig> newBookAlertConfiguration)
         {
-            this.configuration = configuration;
+            this.newBookAlertConfiguration = newBookAlertConfiguration.Value;
         }
 
         public ViewResult Index()
         {
             ViewBag.HeaderTitle = "";
 
-            var newBookAlert = new NewBookAlertConfig();
-            configuration.Bind("NewBookAlert", newBookAlert);
+            //var newBookAlert = new NewBookAlertConfig();
+            //configuration.Bind("NewBookAlert", newBookAlert);
 
-            bool isDisplay = newBookAlert.DisplayNewBookAlert;
+            bool isDisplay = newBookAlertConfiguration.DisplayNewBookAlert;
 
-            var newBook = configuration.GetSection("NewBookAlert");
-            var result = configuration["AppName"];
-            var res = configuration.GetValue<bool>("DisplayNewBookAlert");
-            var key1 = configuration["infoObj:key1"];
-            var key2 = configuration["infoObj:key2"];
-            var key3 = configuration["infoObj:key3:key3obj1"];
+            //var newBook = configuration.GetSection("NewBookAlert");
+            //var result = configuration["AppName"];
+            //var res = configuration.GetValue<bool>("DisplayNewBookAlert");
+            //var key1 = configuration["infoObj:key1"];
+            //var key2 = configuration["infoObj:key2"];
+            //var key3 = configuration["infoObj:key3:key3obj1"];
             return View();
         }
 

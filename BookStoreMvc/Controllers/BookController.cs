@@ -38,7 +38,7 @@ namespace BookStoreMvc.Controllers
             return View(data);
         }
 
-        [Route("book-details/{id}", Name = "bookDetailsRoute")]
+        [Route("book-details/{id:int:min(1)}", Name = "bookDetailsRoute")]
         public async Task<ViewResult> GetBookAsync(int id)
         {
             BookModel data = await _bookRepository.GetBookById(id);

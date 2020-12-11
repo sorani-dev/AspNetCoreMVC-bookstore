@@ -16,9 +16,9 @@ namespace BookStoreMvc.Components
             this.bookRepository = bookRepository;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int count)
         {
-            var books = await bookRepository.GetTopBooksAsync();
+            var books = await bookRepository.GetTopBooksAsync(count);
             return View(books);
         }
     }

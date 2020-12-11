@@ -32,11 +32,9 @@
     <div class="container">
         <h3 class="display-4">Top books</h3>
 
-        @*@await Component.InvokeAsync("TopBooks")*@ 
-        <vc:top-books></vc:top-books>
+        @await Component.InvokeAsync("TopBooks", new { count = 3 }) 
+        @*<vc:top-books count="5"></vc:top-books>*@
 
-      
-</div>
     </div>
 </div>
 

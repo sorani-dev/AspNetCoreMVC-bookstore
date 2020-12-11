@@ -10,11 +10,13 @@ namespace BookStoreMvc.Controllers
             return View();
         }
 
+        [HttpGet("about-us", Name = "aboutus", Order = 1)]
         public ViewResult AboutUs()
         {
             return View();
         }
 
+        [Route("contact-us")]
         public ViewResult ContactUs()
         {
             return View();

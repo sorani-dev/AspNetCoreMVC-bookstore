@@ -30,6 +30,7 @@ namespace BookStoreMvc.Controllers
             return View();
         }
 
+        [Route("all-books")]
         public async Task<ViewResult> GetAllBooks()
         {
             var data = await _bookRepository.GetAllBooks();

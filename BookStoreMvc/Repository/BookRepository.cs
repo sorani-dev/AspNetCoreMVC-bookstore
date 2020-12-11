@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookStoreMvc.Repository
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context = null;
 

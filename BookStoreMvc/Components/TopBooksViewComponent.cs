@@ -9,9 +9,9 @@ namespace BookStoreMvc.Components
 {
     public class TopBooksViewComponent : ViewComponent
     {
-        private readonly BookRepository bookRepository;
+        private readonly IBookRepository bookRepository;
 
-        public TopBooksViewComponent(BookRepository bookRepository)
+        public TopBooksViewComponent(IBookRepository bookRepository)
         {
             this.bookRepository = bookRepository;
         }

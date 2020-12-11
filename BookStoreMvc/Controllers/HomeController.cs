@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStoreMvc.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace BookStoreMvc.Controllers
@@ -15,6 +16,11 @@ namespace BookStoreMvc.Controllers
         public ViewResult Index()
         {
             ViewBag.HeaderTitle = "";
+
+            var newBookAlert = new NewBookAlertConfig();
+            configuration.Bind("NewBookAlert", newBookAlert);
+
+            bool isDisplay = newBookAlert.DisplayNewBookAlert;
 
             var newBook = configuration.GetSection("NewBookAlert");
             var result = configuration["AppName"];

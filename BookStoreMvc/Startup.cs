@@ -39,8 +39,10 @@ namespace BookStoreMvc
 #endif
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddSingleton<IMessageRepository, MessageRepository>();
 
             services.Configure<NewBookAlertConfig>(configuration.GetSection("NewBookAlert"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

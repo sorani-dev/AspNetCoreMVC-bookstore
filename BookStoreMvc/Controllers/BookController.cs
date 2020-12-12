@@ -1,5 +1,6 @@
 ﻿using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,12 +51,10 @@ namespace BookStoreMvc.Controllers
             return _bookRepository.SearchBook(bookName, authorName); // $"Book with name: {bookName} and author: {authorName}";
         }
 
+        [Authorize]
         public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            var model = new BookModel()
-            {
-                //Language = "2",
-            };
+            var model = new BookModel();
 
 
             ViewBag.IsSuccess = isSuccess;

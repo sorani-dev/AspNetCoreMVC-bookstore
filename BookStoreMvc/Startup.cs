@@ -1,4 +1,5 @@
 using BookStoreMvc.Data;
+using BookStoreMvc.Helpers;
 using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -73,6 +74,8 @@ namespace BookStoreMvc
 
             services.Configure<NewBookAlertConfig>("InternalBook", configuration.GetSection("NewBookAlert"));
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", configuration.GetSection("ThirdPartyBookAlert"));
+
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -105,15 +105,19 @@ namespace BookStoreMvc
             {
                 endpoints.MapDefaultControllerRoute();
 
-            //endpoints.MapControllerRoute(
-            //        name: "Default",
-            //        pattern: "{controller}/{action}/{id?}"
-            //        );
+                //endpoints.MapControllerRoute(
+                //        name: "Default",
+                //        pattern: "{controller}/{action}/{id?}"
+                //        );
                 //endpoints.MapControllerRoute(
                 //    name: "AboutUs",
                 //    pattern: "about-us",
                 //    defaults: new { controller = "Home", action = "AboutUs"}
                 //    );
+                endpoints.MapControllerRoute(
+                        name: "MyArea",
+                        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                        );
             });
         }
     }

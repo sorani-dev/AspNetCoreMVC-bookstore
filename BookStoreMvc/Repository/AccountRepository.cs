@@ -99,6 +99,12 @@ namespace BookStoreMvc.Repository
             return await userManager.ConfirmEmailAsync(await userManager.FindByIdAsync(uid), token);
         }
 
+
+        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordModel model)
+        {
+            return await userManager.ResetPasswordAsync(await userManager.FindByIdAsync(model.UserId), model.Token, model.NewPassword);
+        }
+
         private async Task SendEmailConfirmationEmail(ApplicationUser user, string token)
         {
             string appDomain = configuration.GetSection("Application:AppDomain").Value;

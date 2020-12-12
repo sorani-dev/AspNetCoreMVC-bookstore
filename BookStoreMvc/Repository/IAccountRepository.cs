@@ -13,6 +13,7 @@ namespace BookStoreMvc.Repository
         Task GenerateForgottenPasswordTokenAsync(ApplicationUser user);
         Task<ApplicationUser> GetUserByEmailAsync(string email);
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
+        Task<IdentityResult> ResetPasswordAsync(ResetPasswordModel model);
         Task SignOutAsync();
     }
 }

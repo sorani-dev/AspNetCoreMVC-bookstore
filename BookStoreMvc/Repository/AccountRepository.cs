@@ -65,6 +65,16 @@ namespace BookStoreMvc.Repository
             }
         }
 
+
+        public async Task GenerateForgottenPasswordTokenAsync(ApplicationUser user)
+        {
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            if (!string.IsNullOrEmpty(token))
+            {
+                await SendForgottenPasswordEmail(user, token);
+            }
+        }
+
         public async Task<Microsoft.AspNetCore.Identity.SignInResult> PasswordSignInAsync(SignInModel signInModel)
         {
             var result = await signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, signInModel.RememberMe, lockoutOnFailure: false);
@@ -107,5 +117,26 @@ namespace BookStoreMvc.Repository
             };
             await emailService.SendTestEmailForEmailConfirmation(userEmailOptions);
         }
+
+
+        private async Task SendForgottenPasswordEmail(ApplicationUser user, string token)
+        {
+            string appDomain = configuration.GetSection("Application:AppDomain").Value;
+            string confirmationLink = configuration.GetSection("Application:PasswordReset").Value;
+
+            UserEmailOptions userEmailOptions = new UserEmailOptions()
+            {
+                ToEmails = new List<string>() { user.Email },
+                Placeholders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+                    new KeyValuePair<string, string>("{{Link}}",
+                            string.Format(appDomain + confirmationLink, user.Id, token
+                        ))
+                },
+            };
+            await emailService.SendTestEmailForForgottenPassword(userEmailOptions);
+        }
+
     }
 }

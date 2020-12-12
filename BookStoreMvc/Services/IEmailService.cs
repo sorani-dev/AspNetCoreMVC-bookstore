@@ -7,5 +7,6 @@ namespace BookStoreMvc.Services
     {
         Task SendTestEmail(UserEmailOptions userEmailOptions);
         Task SendTestEmailForEmailConfirmation(UserEmailOptions userEmailOptions);
+        Task SendTestEmailForForgottenPassword(UserEmailOptions userEmailOptions);
     }
 }

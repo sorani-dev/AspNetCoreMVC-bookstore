@@ -46,12 +46,12 @@ namespace BookStoreMvc
             });
 
             // Cookie settings   
-            //services.ConfigureApplicationCookie(config =>
-            //{
-            //    config.Cookie.Name = "BookStore";
-            //    config.LoginPath = "/Account/Login"; // User defined login path  
-            //    config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-            //});
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.Cookie.Name = "BookStore";
+                config.LoginPath = configuration["Application:loginPath"]; // User defined login path  
+                config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            });
 
 
             services.AddControllersWithViews();

@@ -2,6 +2,7 @@
 using BookStoreMvc.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,22 @@ namespace BookStoreMvc.Repository
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IUserService userService;
+        private readonly IEmailService emailService;
+        private readonly IConfiguration configuration;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserService userService)
+        public AccountRepository(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager, 
+            IUserService userService,
+            IEmailService emailService,
+            IConfiguration configuration
+            )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.userService = userService;
+            this.emailService = emailService;
+            this.configuration = configuration;
         }
 
         public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
@@ -32,6 +43,15 @@ namespace BookStoreMvc.Repository
                    UserName = userModel.Email,
             };
             var result = await userManager.CreateAsync(user, userModel.Password);
+            if (result.Succeeded)
+            {
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    await SendEmailConfirmationEmail(user, token);
+                }
+            }
+
             return result;
         }
 
@@ -52,6 +72,25 @@ namespace BookStoreMvc.Repository
             var userId = userService.GetUserId();
             ApplicationUser user = await userManager.FindByIdAsync(userId);
             return await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+        }
+
+        private async Task SendEmailConfirmationEmail(ApplicationUser user, string token)
+        {
+            string appDomain = configuration.GetSection("Application:AppDomain").Value;
+            string confirmationLink = configuration.GetSection("Application:EmailConfirmation").Value;
+
+            UserEmailOptions userEmailOptions = new UserEmailOptions()
+            {
+                ToEmails = new List<string>() { user.Email },
+                Placeholders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+                    new KeyValuePair<string, string>("{{Link}}", 
+                            string.Format(appDomain + confirmationLink, user.Id, token
+                        ))
+                },
+            };
+            await emailService.SendTestEmailForEmailConfirmation(userEmailOptions);
         }
     }
 }

@@ -28,27 +28,27 @@ namespace BookStoreMvc.Controllers
 
         public async Task<ViewResult> Index()
         {
-            UserEmailOptions userEmailOptions = new UserEmailOptions()
-            {
-                ToEmails = new List<string>() { "simon@free.fr" },
-                Placeholders = new List<KeyValuePair<string, string>>()
-                {
-                    new KeyValuePair<string, string>("{{UserName}}", "Simon")
-                },
-            };
-            await emailService.SendTestEmail(userEmailOptions);
+            //UserEmailOptions userEmailOptions = new UserEmailOptions()
+            //{
+            //    ToEmails = new List<string>() { "simon@free.fr" },
+            //    Placeholders = new List<KeyValuePair<string, string>>()
+            //    {
+            //        new KeyValuePair<string, string>("{{UserName}}", "Simon")
+            //    },
+            //};
+            //await emailService.SendTestEmail(userEmailOptions);
 
             ViewBag.HeaderTitle = "";
 
-            var userId = userService.GetUserId();
-            var isLoggedIn = userService.IsAuthenticated();
-            //var newBookAlert = new NewBookAlertConfig();
-            //configuration.Bind("NewBookAlert", newBookAlert);
+            //var userId = userService.GetUserId();
+            //var isLoggedIn = userService.IsAuthenticated();
+            ////var newBookAlert = new NewBookAlertConfig();
+            ////configuration.Bind("NewBookAlert", newBookAlert);
 
-            bool isDisplay = newBookAlertConfiguration.DisplayNewBookAlert;
-            bool isDisplay2 = thirdPartyBookAlertConfiguration.DisplayNewBookAlert;
+            //bool isDisplay = newBookAlertConfiguration.DisplayNewBookAlert;
+            //bool isDisplay2 = thirdPartyBookAlertConfiguration.DisplayNewBookAlert;
 
-            var value = messageRepository.GetName();
+            //var value = messageRepository.GetName();
 
             //var newBook = configuration.GetSection("NewBookAlert");
             //var result = configuration["AppName"];

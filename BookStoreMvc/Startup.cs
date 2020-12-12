@@ -45,6 +45,7 @@ namespace BookStoreMvc
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
 
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             // Cookie settings   

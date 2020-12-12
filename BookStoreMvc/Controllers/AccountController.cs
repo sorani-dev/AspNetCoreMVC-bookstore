@@ -66,7 +66,14 @@ namespace BookStoreMvc.Controllers
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("", "Invalid credentials");
+                if (result.IsNotAllowed)
+                {
+                    ModelState.AddModelError("", "Not allowed to log in");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid credentials");
+                }
             }
             return View(model);
         }

@@ -1,6 +1,7 @@
 ﻿using BookStoreMvc.Models;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -21,8 +22,8 @@ namespace BookStoreMvc.Services
 
         public async Task SendTestEmail(UserEmailOptions userEmailOptions)
         {
-            userEmailOptions.Subject = "This is a test email subject for the store web app ";
-            userEmailOptions.Body = GetEmailBody("TestEmail");
+            userEmailOptions.Subject = UpdatePlaceholders("This is a test email subject for the store web app ", userEmailOptions.Placeholders);
+            userEmailOptions.Body = UpdatePlaceholders(GetEmailBody("TestEmail"), userEmailOptions.Placeholders);
 
             await SendEmail(userEmailOptions);
         }
@@ -60,10 +61,25 @@ namespace BookStoreMvc.Services
 
         }
 
-        public string GetEmailBody(string templateName)
+        private string GetEmailBody(string templateName)
         {
             var body = File.ReadAllText(String.Format(templatePath, templateName));
             return body;
+        }
+
+        private string UpdatePlaceholders(string text, List<KeyValuePair<string, string>> keyValuePairs)
+        {
+            if (!string.IsNullOrEmpty(text) && keyValuePairs != null)
+            {
+                foreach (var placeholder in keyValuePairs)
+                {
+                    if (text.Contains(placeholder.Key))
+                    {
+                        text = text.Replace(placeholder.Key, placeholder.Value);
+                    }
+                }
+            }
+            return text;
         }
     }
 }

@@ -30,7 +30,11 @@ namespace BookStoreMvc.Controllers
         {
             UserEmailOptions userEmailOptions = new UserEmailOptions()
             {
-                ToEmails = new List<string>() { "simon@free.fr" }
+                ToEmails = new List<string>() { "simon@free.fr" },
+                Placeholders = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("{{UserName}}", "Simon")
+                },
             };
             await emailService.SendTestEmail(userEmailOptions);
 

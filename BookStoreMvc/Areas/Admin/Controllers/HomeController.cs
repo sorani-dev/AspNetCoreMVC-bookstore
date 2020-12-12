@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 namespace BookStoreMvc.Areas.Admin.Controllers
 {
     [Area("admin")]
+    [Route("admin")] //[Route("admin/[controller]/[action]")]
     public class HomeController : Controller
     {
         // GET: HomeController
+        [Route("index")]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: HomeController/Details/5
+        [Route("details/{id}")]
         public ActionResult Details(int id)
         {
-            return View();
+            return View(id);
         }
 
         // GET: HomeController/Create

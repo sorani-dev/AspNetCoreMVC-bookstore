@@ -7,6 +7,7 @@ namespace BookStoreMvc.Repository
     public interface IAccountRepository
     {
         Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
+        Task<IdentityResult> ConfirmEmailAsync(string uid, string token);
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
         Task SignOutAsync();

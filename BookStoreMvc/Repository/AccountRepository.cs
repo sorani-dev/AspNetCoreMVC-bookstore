@@ -74,6 +74,11 @@ namespace BookStoreMvc.Repository
             return await userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
 
+        public async Task<IdentityResult> ConfirmEmailAsync(string uid, string token)
+        {
+            return await userManager.ConfirmEmailAsync(await userManager.FindByIdAsync(uid), token);
+        }
+
         private async Task SendEmailConfirmationEmail(ApplicationUser user, string token)
         {
             string appDomain = configuration.GetSection("Application:AppDomain").Value;

@@ -33,6 +33,11 @@ namespace BookStoreMvc.Repository
             this.configuration = configuration;
         }
 
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            return await userManager.FindByEmailAsync(email);
+        }
+
         public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
         {
             var user = new ApplicationUser()
@@ -45,14 +50,19 @@ namespace BookStoreMvc.Repository
             var result = await userManager.CreateAsync(user, userModel.Password);
             if (result.Succeeded)
             {
-                var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                if (!string.IsNullOrEmpty(token))
-                {
-                    await SendEmailConfirmationEmail(user, token);
-                }
+                await GenerateEmailConfirmationTokenAsync(user);
             }
 
             return result;
+        }
+
+        public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            if (!string.IsNullOrEmpty(token))
+            {
+                await SendEmailConfirmationEmail(user, token);
+            }
         }
 
         public async Task<Microsoft.AspNetCore.Identity.SignInResult> PasswordSignInAsync(SignInModel signInModel)

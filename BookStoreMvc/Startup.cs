@@ -52,6 +52,11 @@ namespace BookStoreMvc
                 options.Lockout.MaxFailedAccessAttempts = 3;
             });
 
+            services.Configure<DataProtectionTokenProviderOptions>(options => 
+            {
+                options.TokenLifespan = TimeSpan.FromMinutes(5);
+            });
+
             // Cookie settings   
             services.ConfigureApplicationCookie(config =>
             {

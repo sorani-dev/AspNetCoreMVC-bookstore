@@ -1,0 +1,24 @@
+[
+  {
+    "outputFileName": "wwwroot/dist/app.min.css",
+    "inputFiles": [
+      "wwwroot/css/Site.css",
+      "wwwroot/css/NewStyle.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/dist/app.min.js",
+    "inputFiles": [
+      "wwwroot/js/*"
+    ],
+    "minify": {
+      "enabled": true,
+      "outputMode": "singleLine",
+      "renameLocals": true
+    }
+  }
+]

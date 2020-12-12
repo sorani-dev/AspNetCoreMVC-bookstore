@@ -26,7 +26,7 @@ namespace BookStoreMvc.Controllers
             this.emailService = emailService;
         }
 
-        public async Task<ViewResult> Index()
+        public ViewResult Index()
         {
             //UserEmailOptions userEmailOptions = new UserEmailOptions()
             //{

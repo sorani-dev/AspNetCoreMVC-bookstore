@@ -1,9 +1,7 @@
 ﻿using BookStoreMvc.Models;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -11,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookStoreMvc.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private const string templatePath = @"EmailTemplate/{0}.html";
         private readonly SMTPConfigModel smtpConfig;
@@ -19,6 +17,14 @@ namespace BookStoreMvc.Services
         public EmailService(IOptions<SMTPConfigModel> options)
         {
             this.smtpConfig = options.Value;
+        }
+
+        public async Task SendTestEmail(UserEmailOptions userEmailOptions)
+        {
+            userEmailOptions.Subject = "This is a test email subject for the store web app ";
+            userEmailOptions.Body = GetEmailBody("TestEmail");
+
+            await SendEmail(userEmailOptions);
         }
 
         private async Task SendEmail(UserEmailOptions userEmailOptions)

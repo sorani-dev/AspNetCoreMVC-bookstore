@@ -73,13 +73,14 @@ namespace BookStoreMvc
 
             services.AddSingleton<IMessageRepository, MessageRepository>();
 
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
+
             services.Configure<NewBookAlertConfig>("InternalBook", configuration.GetSection("NewBookAlert"));
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", configuration.GetSection("ThirdPartyBookAlert"));
             services.Configure<SMTPConfigModel>(configuration.GetSection("SMTPConfig"));
-
-            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
-            services.AddScoped<IUserService, UserService>();
-            
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

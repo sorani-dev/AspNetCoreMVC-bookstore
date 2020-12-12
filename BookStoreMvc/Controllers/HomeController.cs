@@ -4,6 +4,8 @@ using BookStoreMvc.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BookStoreMvc.Controllers
 {
@@ -13,17 +15,25 @@ namespace BookStoreMvc.Controllers
         private NewBookAlertConfig thirdPartyBookAlertConfiguration;
         private readonly IMessageRepository messageRepository;
         private readonly IUserService userService;
+        private readonly IEmailService emailService;
 
-        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfiguration, IMessageRepository messageRepository, IUserService userService)
+        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfiguration, IMessageRepository messageRepository, IUserService userService, IEmailService emailService)
         {
             this.newBookAlertConfiguration = newBookAlertConfiguration.Get("InternalBook");
             this.thirdPartyBookAlertConfiguration = newBookAlertConfiguration.Get("ThirdPartyBook");
             this.messageRepository = messageRepository;
             this.userService = userService;
+            this.emailService = emailService;
         }
 
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
         {
+            UserEmailOptions userEmailOptions = new UserEmailOptions()
+            {
+                ToEmails = new List<string>() { "simon@free.fr" }
+            };
+            await emailService.SendTestEmail(userEmailOptions);
+
             ViewBag.HeaderTitle = "";
 
             var userId = userService.GetUserId();

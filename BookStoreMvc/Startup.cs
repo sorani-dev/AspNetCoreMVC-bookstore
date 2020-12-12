@@ -46,6 +46,10 @@ namespace BookStoreMvc
                 options.Password.RequireUppercase = false;
 
                 options.SignIn.RequireConfirmedEmail = true;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.MaxFailedAccessAttempts = 3;
             });
 
             // Cookie settings   

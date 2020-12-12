@@ -71,6 +71,10 @@ namespace BookStoreMvc.Controllers
                 {
                     ModelState.AddModelError("", "Not allowed to log in");
                 }
+                else if (result.IsLockedOut)
+                {
+                    ModelState.AddModelError("", "Account blocked. Try again after some time.");
+                }
                 else
                 {
                     ModelState.AddModelError("", "Invalid credentials");

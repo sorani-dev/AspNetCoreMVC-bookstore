@@ -34,8 +34,14 @@ namespace BookStoreMvc.Repository
 
         public async Task<Microsoft.AspNetCore.Identity.SignInResult> PasswordSignInAsync(SignInModel signInModel)
         {
-            var result = await signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, signInModel.RememberMe, false);
+            var result = await signInManager.PasswordSignInAsync(signInModel.Email, signInModel.Password, signInModel.RememberMe, lockoutOnFailure: false);
             return result;
+        }
+
+
+        public async Task SignOutAsync()
+        {
+            await signInManager.SignOutAsync();
         }
     }
 }

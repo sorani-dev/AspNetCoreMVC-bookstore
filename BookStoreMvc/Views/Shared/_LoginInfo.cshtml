@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hello @User.Identity.Name
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a>
+        </div>
+    </li>
+}
+else
+{
+    <li class="nav-item active">
+        <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Login">Login</a>
+        <a class="btn btn-primary" asp-controller="Account" asp-action="SignUp">Register</a>
+    </li>
+}
+

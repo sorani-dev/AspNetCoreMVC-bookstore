@@ -1,6 +1,7 @@
 using BookStoreMvc.Data;
 using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace BookStoreMvc
 {
@@ -29,7 +31,8 @@ namespace BookStoreMvc
                 );
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<BookStoreContext>();
+                .AddEntityFrameworkStores<BookStoreContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options => {
                 options.Password.RequireDigit = false;
@@ -41,6 +44,15 @@ namespace BookStoreMvc
                 options.Password.RequireUppercase = false;
 
             });
+
+            // Cookie settings   
+            //services.ConfigureApplicationCookie(config =>
+            //{
+            //    config.Cookie.Name = "BookStore";
+            //    config.LoginPath = "/Account/Login"; // User defined login path  
+            //    config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+            //});
+
 
             services.AddControllersWithViews();
 
@@ -61,7 +73,6 @@ namespace BookStoreMvc
 
             services.Configure<NewBookAlertConfig>("InternalBook", configuration.GetSection("NewBookAlert"));
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", configuration.GetSection("ThirdPartyBookAlert"));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +86,11 @@ namespace BookStoreMvc
             app.UseStaticFiles();
 
             app.UseRouting();
+
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

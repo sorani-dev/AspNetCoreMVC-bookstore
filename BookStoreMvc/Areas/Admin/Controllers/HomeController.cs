@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,8 +11,15 @@ namespace BookStoreMvc.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("admin")] //[Route("admin/[controller]/[action]")]
+    [Authorize(Roles =("Admin"))]
     public class HomeController : Controller
     {
+        private readonly RoleManager<IdentityRole> roleManager;
+
+        public HomeController(RoleManager<IdentityRole> roleManager)
+        {
+            this.roleManager = roleManager;
+        }
         // GET: HomeController
         [Route("index")]
         public ActionResult Index()

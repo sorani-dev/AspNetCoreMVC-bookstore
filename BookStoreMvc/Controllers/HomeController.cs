@@ -65,6 +65,8 @@ namespace BookStoreMvc.Controllers
             return View();
         }
 
+        // Uncomment the below line to enable roles on this action method.
+        //[Authorize(Roles ="Admin,User")]
         [Route("contact-us")]
         public ViewResult ContactUs()
         {

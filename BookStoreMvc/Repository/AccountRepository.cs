@@ -14,6 +14,7 @@ namespace BookStoreMvc.Repository
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IUserService userService;
         private readonly IEmailService emailService;
         private readonly IConfiguration configuration;
@@ -21,6 +22,7 @@ namespace BookStoreMvc.Repository
         public AccountRepository(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, 
+            RoleManager<IdentityRole> roleManager,
             IUserService userService,
             IEmailService emailService,
             IConfiguration configuration
@@ -28,6 +30,7 @@ namespace BookStoreMvc.Repository
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             this.userService = userService;
             this.emailService = emailService;
             this.configuration = configuration;

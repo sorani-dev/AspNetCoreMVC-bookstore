@@ -1,5 +1,6 @@
 ﻿using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
+using BookStoreMvc.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -11,18 +12,22 @@ namespace BookStoreMvc.Controllers
         private NewBookAlertConfig newBookAlertConfiguration;
         private NewBookAlertConfig thirdPartyBookAlertConfiguration;
         private readonly IMessageRepository messageRepository;
+        private readonly IUserService userService;
 
-        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfiguration, IMessageRepository messageRepository)
+        public HomeController(IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfiguration, IMessageRepository messageRepository, IUserService userService)
         {
             this.newBookAlertConfiguration = newBookAlertConfiguration.Get("InternalBook");
             this.thirdPartyBookAlertConfiguration = newBookAlertConfiguration.Get("ThirdPartyBook");
             this.messageRepository = messageRepository;
+            this.userService = userService;
         }
 
         public ViewResult Index()
         {
             ViewBag.HeaderTitle = "";
 
+            var userId = userService.GetUserId();
+            var isLoggedIn = userService.IsAuthenticated();
             //var newBookAlert = new NewBookAlertConfig();
             //configuration.Bind("NewBookAlert", newBookAlert);
 

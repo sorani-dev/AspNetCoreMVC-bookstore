@@ -12,8 +12,10 @@ namespace BookStoreMvc.Repository
         Task GenerateEmailConfirmationTokenAsync(ApplicationUser user);
         Task GenerateForgottenPasswordTokenAsync(ApplicationUser user);
         Task<ApplicationUser> GetUserByEmailAsync(string email);
+        Task<UserInfoDetailsModel> GetUserInfoAsync(UserInfoDetailsModel model);
         Task<SignInResult> PasswordSignInAsync(SignInModel signInModel);
         Task<IdentityResult> ResetPasswordAsync(ResetPasswordModel model);
+        Task<IdentityResult> SaveUserInfoAsync(UserInfoDetailsModel model);
         Task SignOutAsync();
     }
 }

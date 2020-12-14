@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BookStoreMvc.Controllers
@@ -214,6 +215,44 @@ namespace BookStoreMvc.Controllers
                 {
                     ModelState.AddModelError("", error.Description);
                 }
+            }
+            return View(model);
+        }
+
+        [HttpGet("user-details")]
+        public async Task<IActionResult> PersonalDetails()
+        {
+            var uid = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            UserInfoDetailsModel model = new UserInfoDetailsModel
+            {
+                Id = uid
+            };
+            model = await accountRepository.GetUserInfoAsync(model);
+            return View(model);
+        }
+
+        [HttpGet("user-details/edit")]
+        public async Task<IActionResult> EditPersonalDetails(int id)
+        {
+            var uid = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            UserInfoDetailsModel model = new UserInfoDetailsModel
+            {
+                Id = uid
+            };
+            model = await accountRepository.GetUserInfoAsync(model);
+            return View(model);
+        }
+
+        [HttpPost("user-details/edit")]
+        public async Task<IActionResult> EditPersonalDetails(UserInfoDetailsModel model)
+        {
+            var result = await accountRepository.SaveUserInfoAsync(model);
+            if (result.Succeeded)
+            {
+                ViewBag.IsSuccess = true;
+                return RedirectToAction("PersonalDetails", "Account");
             }
             return View(model);
         }

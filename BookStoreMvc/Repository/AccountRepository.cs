@@ -45,10 +45,11 @@ namespace BookStoreMvc.Repository
         {
             var user = new ApplicationUser()
             {
-                FirstName = userModel.FirstName,
+                FirstName = userModel.LastName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,
                    UserName = userModel.Email,
+                   DateOfBirth = userModel.DateOfBirth
             };
             var result = await userManager.CreateAsync(user, userModel.Password);
             if (result.Succeeded)
@@ -108,6 +109,138 @@ namespace BookStoreMvc.Repository
             return await userManager.ResetPasswordAsync(await userManager.FindByIdAsync(model.UserId), model.Token, model.NewPassword);
         }
 
+
+        public async Task<UserInfoDetailsModel> GetUserInfoAsync(UserInfoDetailsModel model)
+        {
+            var result = await userManager.FindByIdAsync(model.Id);
+            if (result != null)
+            {
+                model.FirstName = result.FirstName;
+                model.LastName = result.LastName;
+                model.UserName = result.UserName;
+                model.DateOfBirth = result.DateOfBirth;
+                model.Email = result.Email;
+                model.Id = result.Id;
+                model.Password = result.PasswordHash;
+                return model;
+            }
+            return null;
+        }
+
+        public async Task<IdentityResult> SaveUserInfoAsync(UserInfoDetailsModel model)
+        {
+            var u = await userManager.FindByIdAsync(model.Id);          
+            if (u == null)
+            {
+                return null;
+            }
+            var user = new ApplicationUser()
+            {
+                FirstName = model.LastName,
+                LastName = model.LastName,
+                Email = model.Email,
+                DateOfBirth = model.DateOfBirth
+            };
+            var firstName = u.FirstName;
+            var lastName = u.LastName;
+            if (model.FirstName != firstName)
+            {
+                u.FirstName = model.FirstName;
+                //await userManager.UpdateAsync(u);
+            }
+            if (model.LastName != lastName)
+            {
+                u.LastName = model.LastName;
+                //await userManager.UpdateAsync(u);
+            }
+            if (model.Email != u.Email)
+            {
+                u.Email = model.Email;
+            }
+            if (model.DateOfBirth != u.DateOfBirth)
+            {
+                u.DateOfBirth = model.DateOfBirth;
+            }
+            //if (u.UserName != model.UserName)
+            //{
+            //    var userNameExists = await userManager.FindByNameAsync(model.UserName);
+            //    if (userNameExists != null)
+            //    {
+            //        ModelState.AddModelError("", "User name already taken. Select a different username.");
+            //    }
+
+            //    var setUserName = await userManager.SetUserNameAsync(user, model.UserName);
+            //    if (!setUserName.Succeeded)
+            //    {
+            //        ModelState.AddModelError("", "Unexpected error when trying to set user name.");
+            //    }
+            //    else
+            //    {
+            //        return await userManager.UpdateAsync(user);
+            //    }
+            //}
+            //else
+            //{
+            //    return await userManager.UpdateAsync(user);
+            //}
+            return await userManager.UpdateAsync(u);
+            return null;
+            if (u.FirstName != model.FirstName)
+            {
+                u.FirstName = model.FirstName;
+            }
+            if (u.UserName != model.UserName)
+            {
+                u.UserName = model.UserName;
+            }
+
+            var result = await userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                
+            }
+
+            return result;
+            //ApplicationUser u = new ApplicationUser
+            //{
+            //    Id = model.Id,
+            //    DateOfBirth = model.DateOfBirth,
+            //    Email = model.Email,
+            //    FirstName = model.LastName,
+            //    LastName = model.LastName,
+            //    UserName = model.UserName
+            //};
+            //var user = await userManager.FindByIdAsync(model.Id);
+            //if (user != null)
+            //{
+            //    if (user.DateOfBirth != model.DateOfBirth) {
+            //        user.DateOfBirth = model.DateOfBirth;
+            //    }
+            //    if (user.Email != model.Email)
+            //    {
+            //        user.Email = model.Email;
+            //    }
+            //    user.FirstName = model.LastName;
+            //    user.LastName = model.LastName;
+            //    user.UserName = model.UserName;
+            //    ApplicationUser res = await userManager.UpdateAsync(u);
+            //    if (res.su)
+            //    {
+
+            //    }
+            //}
+            //return null;
+            ////if (model.LastName != user.LastName)
+            ////{
+            ////    await userManager.UpdateAsync(u);
+            ////}
+            ////if (model.LastName != user.LastName)
+            ////{
+            ////    await userManager.UpdateAsync(u);
+            ////}
+            //return await userManager.UpdateAsync(u);
+        }
+
         private async Task SendEmailConfirmationEmail(ApplicationUser user, string token)
         {
             string appDomain = configuration.GetSection("Application:AppDomain").Value;
@@ -118,7 +251,7 @@ namespace BookStoreMvc.Repository
                 ToEmails = new List<string>() { user.Email },
                 Placeholders = new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+                    new KeyValuePair<string, string>("{{UserName}}", user.LastName),
                     new KeyValuePair<string, string>("{{Link}}", 
                             string.Format(appDomain + confirmationLink, user.Id, token
                         ))
@@ -138,7 +271,7 @@ namespace BookStoreMvc.Repository
                 ToEmails = new List<string>() { user.Email },
                 Placeholders = new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+                    new KeyValuePair<string, string>("{{UserName}}", user.LastName),
                     new KeyValuePair<string, string>("{{Link}}",
                             string.Format(appDomain + confirmationLink, user.Id, token
                         ))

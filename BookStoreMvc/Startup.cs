@@ -106,7 +106,7 @@ namespace BookStoreMvc
             else
             {
                 app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                //app.UseHsts();
                 app.Use(async (ctx, next) =>
                 {
                     await next();
@@ -127,7 +127,7 @@ namespace BookStoreMvc
             //app.UseStatusCodePages();
             //app.UseStatusCodePagesWithReExecute("/Error");
             //app.UseStatusCodePagesWithReExecute("/Error/{0}");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 

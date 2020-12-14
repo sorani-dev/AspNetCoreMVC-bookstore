@@ -1,7 +1,19 @@
 ﻿
 @{
+    Layout = "_layout";
     ViewData["Title"] = "Index";
 }
+<div class="container offset-4 col-4">
+    
+    <h1>Index from Admin</h1>
 
-<h1>Index from Admin</h1>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-action list-group-item-light"><a class="nav-link nav-pills" asp-area="Admin" asp-controller="UserRoles" asp-action="Index">Manage User Roles</a></li>
+        <li class="list-group-item list-group-item-action list-group-item-light"><a class="nav-link  nav-pills" asp-controller="RoleManager" asp-action="Index" asp-area="Admin">Role manager</a></li>
+        <li class="list-group-item list-group-item-action list-group-item-light"><a class="nav-link  nav-pills" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a></li>
+        <li class="list-group-item list-group-item-action list-group-item-light"><a class="nav-link  nav-pills" asp-area="Admin" asp-controller="Home" asp-action="Details" asp-route-id="4">Details</a></li>
+        <li class="list-group-item list-group-item-action list-group-item-light"><a class="nav-link nav-pills" asp-controller="Home" asp-action="Index" asp-area="">Back to home page</a></li>
 
+
+    </ul>
+</div>

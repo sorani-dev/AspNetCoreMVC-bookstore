@@ -22,6 +22,7 @@ namespace BookStoreMvc.Areas.Admin.Controllers
         }
         // GET: HomeController
         [Route("index")]
+        [Route("")]
         public ActionResult Index()
         {
             return View();
@@ -35,13 +36,14 @@ namespace BookStoreMvc.Areas.Admin.Controllers
         }
 
         // GET: HomeController/Create
+        [HttpGet("create")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: HomeController/Create
-        [HttpPost]
+        [HttpPost("create")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
@@ -56,13 +58,14 @@ namespace BookStoreMvc.Areas.Admin.Controllers
         }
 
         // GET: HomeController/Edit/5
+        [HttpGet("edit/{id}")]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         // POST: HomeController/Edit/5
-        [HttpPost]
+        [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
@@ -77,13 +80,14 @@ namespace BookStoreMvc.Areas.Admin.Controllers
         }
 
         // GET: HomeController/Delete/5
+        [HttpGet("delete/{id}")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: HomeController/Delete/5
-        [HttpPost]
+        [HttpPost("delete/{id}")]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {

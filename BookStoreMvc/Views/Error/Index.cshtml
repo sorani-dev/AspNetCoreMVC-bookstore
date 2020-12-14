@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Error occurred";
+}
+
+<h1>We have a problem</h1>
+
+<p>Sorry, an error occurred while executing your request.</p>
+
+<p>Error: ViewBag.error.Message with code: @ViewBag.error.ToString()</p>
+<p>It occurred on @ViewBag.originalPath</p>

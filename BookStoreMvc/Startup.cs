@@ -3,6 +3,7 @@ using BookStoreMvc.Helpers;
 using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using BookStoreMvc.Services;
+using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -90,8 +91,8 @@ namespace BookStoreMvc
             services.Configure<NewBookAlertConfig>("InternalBook", configuration.GetSection("NewBookAlert"));
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", configuration.GetSection("ThirdPartyBookAlert"));
             services.Configure<SMTPConfigModel>(configuration.GetSection("SMTPConfig"));
-           
-        }
+
+         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -99,12 +100,38 @@ namespace BookStoreMvc
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                app.UseBrowserLink();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+                app.Use(async (ctx, next) =>
+                {
+                    await next();
+
+                    if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
+                    {
+                        //Re-execute the request so the user gets the error page
+                        string originalPath = ctx.Request.Path.Value;
+                        ctx.Items["originalPath"] = originalPath;
+                        ctx.Request.Path = "/error/404";
+                        await next();
+                    }
+                });
+
+
+            }
+
+            //app.UseStatusCodePages();
+            //app.UseStatusCodePagesWithReExecute("/Error");
+            //app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 
             app.UseRouting();
-
 
             app.UseAuthentication();
 

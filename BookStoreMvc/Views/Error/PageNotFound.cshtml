@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "Page Not Found";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "404";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-4">
+
+            <h1>404 - Page not found</h1>
+
+            <p>Oops, better check that URL.</p>
+            <p>You came from @ViewBag.originalPath</p>
+
+            <p><a href="/">>>Back to Index</a></p>
+        </div>
+    </div>
+</div>
+

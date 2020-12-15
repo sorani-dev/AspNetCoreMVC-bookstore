@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201211225231_AddApplicationUser.cs" />
     <Compile Remove="Migrations\20201211225231_AddApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20201215094904_AddProfilePictureToUser.cs" />
+    <Compile Remove="Migrations\20201215094904_AddProfilePictureToUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

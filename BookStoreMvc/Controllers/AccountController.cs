@@ -1,9 +1,11 @@
 ﻿using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -248,6 +250,15 @@ namespace BookStoreMvc.Controllers
         [HttpPost("user-details/edit")]
         public async Task<IActionResult> EditPersonalDetails(UserInfoDetailsModel model)
         {
+            if (Request.Form.Files.Count > 0)
+            {
+                IFormFile file = Request.Form.Files.FirstOrDefault();
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    model.ProfilePicture = dataStream.ToArray();
+                }
+            }
             var result = await accountRepository.SaveUserInfoAsync(model);
             if (result.Succeeded)
             {

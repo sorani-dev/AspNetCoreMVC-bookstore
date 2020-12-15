@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,5 +28,13 @@ namespace BookStoreMvc.Models
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
+        [Phone]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; }
+        [Display(Name = "Profile Picture")]
+        public byte[] ProfilePicture { get; set; }
+        [Display(Name = "Profile Picture")]
+        public IFormFile ProfilePictureImage { get; set; }
+        public string ProfilePicturePath { get; set; }
     }
 }

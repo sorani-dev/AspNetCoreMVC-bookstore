@@ -122,6 +122,7 @@ namespace BookStoreMvc.Repository
                 model.Email = result.Email;
                 model.Id = result.Id;
                 model.Password = result.PasswordHash;
+                model.ProfilePicture = result.ProfilePicture;
                 return model;
             }
             return null;
@@ -134,12 +135,14 @@ namespace BookStoreMvc.Repository
             {
                 return null;
             }
+
             var user = new ApplicationUser()
             {
                 FirstName = model.LastName,
                 LastName = model.LastName,
                 Email = model.Email,
-                DateOfBirth = model.DateOfBirth
+                DateOfBirth = model.DateOfBirth,
+                ProfilePicture = model.ProfilePicture
             };
             var firstName = u.FirstName;
             var lastName = u.LastName;
@@ -160,6 +163,10 @@ namespace BookStoreMvc.Repository
             if (model.DateOfBirth != u.DateOfBirth)
             {
                 u.DateOfBirth = model.DateOfBirth;
+            }
+            if (model.ProfilePicture != u.ProfilePicture)
+            {
+                u.ProfilePicture = model.ProfilePicture;
             }
             //if (u.UserName != model.UserName)
             //{

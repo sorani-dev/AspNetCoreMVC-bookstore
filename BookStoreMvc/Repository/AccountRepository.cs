@@ -123,6 +123,7 @@ namespace BookStoreMvc.Repository
                 model.Id = result.Id;
                 model.Password = result.PasswordHash;
                 model.ProfilePicture = result.ProfilePicture;
+                model.PhoneNumber = result.PhoneNumber;
                 return model;
             }
             return null;
@@ -163,6 +164,10 @@ namespace BookStoreMvc.Repository
             if (model.DateOfBirth != u.DateOfBirth)
             {
                 u.DateOfBirth = model.DateOfBirth;
+            }
+            if (model.PhoneNumber != u.PhoneNumber)
+            {
+                u.PhoneNumber = model.PhoneNumber;
             }
             if (model.ProfilePicture != u.ProfilePicture)
             {

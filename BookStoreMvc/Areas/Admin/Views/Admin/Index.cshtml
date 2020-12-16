@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "IndexAsync";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<BookStoreMvc.Models.ApplicationUser>
+@*@model List<BookStoreMvc.Areas.Admin.Models.UserViewModel>*@
+
+<h1>IndexAsync</h1>
+
+<h1>User Roles</h1>
+<div class="row">
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success" role="alert">
+            <p>@ViewBag.Message</p>
+        </div>
+    }
+
+    @if (ViewBag.IsError == true)
+    {
+        <div class="alert alert-danger" role="alert">
+            <p>@ViewBag.Message</p>
+        </div>
+    }
+    <div class="col-md-8 offset-2">
+        <form method="post" asp-action="Search" asp-controller="Admin" asp-area="Admin" class="form-inline form-row w-100">
+            <input type="search" value="" name="q" class="form-control col" />
+            <button type="submit" class="btn btn-primary col-1">Search</button>
+        </form>
+
+    </div>
+    <div class="col-md-2 text-right pr-5">
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Admin" asp-action="Create">Create user</a>
+    </div>
+</div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Email Confirmed</th>
+                <th>Access failed count</th>
+                <th>Lockout End</th>
+                @*<th>Roles</th>*@
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.EmailConfirmed</td>
+                    <td>@user.AccessFailedCount</td>
+                    <td>@user.LockoutEnd</td>
+                    @*<td>@string.Join(" , ", user.Roles.ToList())</td>*@
+                    <td class="">
+                        <div class="d-inline-flex justify-content-around align-items-center">
+                        <a class="btn btn-sm btn-primary" asp-controller="Admin" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                        <a class="btn btn-sm btn-secondary mx-2" asp-controller="Admin" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+                        <form asp-controller="Admin" asp-action="BeforeDelete" method="post" class="form-inline">
+                            <input type="hidden" value="@user.Id" name="id" />
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                            </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

@@ -1,6 +1,4 @@
-﻿using BookStoreMvc.Enum;
-using BookStoreMvc.Helpers;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -32,7 +30,7 @@ namespace BookStoreMvc.Models
         //public List<string> MultiLanguage { get; set; }
 
         [Required(ErrorMessage = "Please enter the number of pages of your book")]
-        [Display(Name ="Total pages of the book")]
+        [Display(Name = "Total pages of the book")]
         public int? TotalPages { get; set; }
 
         [Display(Name = "Choose the cover photo of the book")]

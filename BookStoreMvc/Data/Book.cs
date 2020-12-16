@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookStoreMvc.Data
 {
@@ -30,7 +28,7 @@ namespace BookStoreMvc.Data
 
         public DateTime? UpdatedOn { get; set; }
 
-        public Language Language { get;  set; }
+        public Language Language { get; set; }
 
         public ICollection<BookGallery> bookGallery { get; set; }
     }

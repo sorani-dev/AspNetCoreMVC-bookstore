@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStoreMvc.Repository
@@ -21,7 +20,7 @@ namespace BookStoreMvc.Repository
 
         public AccountRepository(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             IUserService userService,
             IEmailService emailService,
@@ -48,8 +47,10 @@ namespace BookStoreMvc.Repository
                 FirstName = userModel.LastName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,
-                   UserName = userModel.Email,
-                   DateOfBirth = userModel.DateOfBirth
+                UserName = userModel.Email,
+                DateOfBirth = userModel.DateOfBirth,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
             };
             var result = await userManager.CreateAsync(user, userModel.Password);
             if (result.Succeeded)
@@ -131,7 +132,7 @@ namespace BookStoreMvc.Repository
 
         public async Task<IdentityResult> SaveUserInfoAsync(UserInfoDetailsModel model)
         {
-            var u = await userManager.FindByIdAsync(model.Id);          
+            var u = await userManager.FindByIdAsync(model.Id);
             if (u == null)
             {
                 return null;
@@ -196,61 +197,61 @@ namespace BookStoreMvc.Repository
             //    return await userManager.UpdateAsync(user);
             //}
             return await userManager.UpdateAsync(u);
-            return null;
-            if (u.FirstName != model.FirstName)
-            {
-                u.FirstName = model.FirstName;
-            }
-            if (u.UserName != model.UserName)
-            {
-                u.UserName = model.UserName;
-            }
-
-            var result = await userManager.UpdateAsync(user);
-            if (result.Succeeded)
-            {
-                
-            }
-
-            return result;
-            //ApplicationUser u = new ApplicationUser
-            //{
-            //    Id = model.Id,
-            //    DateOfBirth = model.DateOfBirth,
-            //    Email = model.Email,
-            //    FirstName = model.LastName,
-            //    LastName = model.LastName,
-            //    UserName = model.UserName
-            //};
-            //var user = await userManager.FindByIdAsync(model.Id);
-            //if (user != null)
-            //{
-            //    if (user.DateOfBirth != model.DateOfBirth) {
-            //        user.DateOfBirth = model.DateOfBirth;
-            //    }
-            //    if (user.Email != model.Email)
-            //    {
-            //        user.Email = model.Email;
-            //    }
-            //    user.FirstName = model.LastName;
-            //    user.LastName = model.LastName;
-            //    user.UserName = model.UserName;
-            //    ApplicationUser res = await userManager.UpdateAsync(u);
-            //    if (res.su)
-            //    {
-
-            //    }
-            //}
             //return null;
-            ////if (model.LastName != user.LastName)
+            //if (u.FirstName != model.FirstName)
+            //{
+            //    u.FirstName = model.FirstName;
+            //}
+            //if (u.UserName != model.UserName)
+            //{
+            //    u.UserName = model.UserName;
+            //}
+
+            //var result = await userManager.UpdateAsync(user);
+            //if (result.Succeeded)
+            //{
+
+            //}
+
+            //return result;
+            ////ApplicationUser u = new ApplicationUser
             ////{
-            ////    await userManager.UpdateAsync(u);
-            ////}
-            ////if (model.LastName != user.LastName)
+            ////    Id = model.Id,
+            ////    DateOfBirth = model.DateOfBirth,
+            ////    Email = model.Email,
+            ////    FirstName = model.LastName,
+            ////    LastName = model.LastName,
+            ////    UserName = model.UserName
+            ////};
+            ////var user = await userManager.FindByIdAsync(model.Id);
+            ////if (user != null)
             ////{
-            ////    await userManager.UpdateAsync(u);
+            ////    if (user.DateOfBirth != model.DateOfBirth) {
+            ////        user.DateOfBirth = model.DateOfBirth;
+            ////    }
+            ////    if (user.Email != model.Email)
+            ////    {
+            ////        user.Email = model.Email;
+            ////    }
+            ////    user.FirstName = model.LastName;
+            ////    user.LastName = model.LastName;
+            ////    user.UserName = model.UserName;
+            ////    ApplicationUser res = await userManager.UpdateAsync(u);
+            ////    if (res.su)
+            ////    {
+
+            ////    }
             ////}
-            //return await userManager.UpdateAsync(u);
+            ////return null;
+            //////if (model.LastName != user.LastName)
+            //////{
+            //////    await userManager.UpdateAsync(u);
+            //////}
+            //////if (model.LastName != user.LastName)
+            //////{
+            //////    await userManager.UpdateAsync(u);
+            //////}
+            ////return await userManager.UpdateAsync(u);
         }
 
         private async Task SendEmailConfirmationEmail(ApplicationUser user, string token)
@@ -264,7 +265,7 @@ namespace BookStoreMvc.Repository
                 Placeholders = new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("{{UserName}}", user.LastName),
-                    new KeyValuePair<string, string>("{{Link}}", 
+                    new KeyValuePair<string, string>("{{Link}}",
                             string.Format(appDomain + confirmationLink, user.Id, token
                         ))
                 },

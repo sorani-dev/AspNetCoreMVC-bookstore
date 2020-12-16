@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BookStoreMvc.Enum
 {
@@ -14,7 +10,7 @@ namespace BookStoreMvc.Enum
         //Chinese,
         //Japanese,
         //Spanish
-        [Display(Name ="English Language")]
+        [Display(Name = "English Language")]
         English = 10,
         [Display(Name = "French Language")]
         French = 11,

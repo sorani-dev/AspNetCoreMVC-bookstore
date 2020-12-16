@@ -3,8 +3,6 @@ using BookStoreMvc.Helpers;
 using BookStoreMvc.Models;
 using BookStoreMvc.Repository;
 using BookStoreMvc.Services;
-using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -37,7 +35,8 @@ namespace BookStoreMvc
                 .AddEntityFrameworkStores<BookStoreContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options => {
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 5;
                 options.Password.RequireLowercase = false;
@@ -53,7 +52,7 @@ namespace BookStoreMvc
                 options.Lockout.MaxFailedAccessAttempts = 3;
             });
 
-            services.Configure<DataProtectionTokenProviderOptions>(options => 
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
             {
                 options.TokenLifespan = TimeSpan.FromMinutes(5);
             });
@@ -71,7 +70,7 @@ namespace BookStoreMvc
 
 #if DEBUG            
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            
+
             // Umcomment this code to disable client-side validations.
             //.AddViewOptions(option =>
             //{
@@ -92,7 +91,7 @@ namespace BookStoreMvc
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", configuration.GetSection("ThirdPartyBookAlert"));
             services.Configure<SMTPConfigModel>(configuration.GetSection("SMTPConfig"));
 
-         }
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

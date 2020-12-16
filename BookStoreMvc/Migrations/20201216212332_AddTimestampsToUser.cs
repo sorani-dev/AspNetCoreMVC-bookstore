@@ -1,20 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookStoreMvc.Migrations
 {
-    public partial class AddedBookTimestamps : Migration
+    public partial class AddTimestampsToUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
                 name: "CreatedOn",
-                table: "Books",
+                table: "AspNetUsers",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "UpdatedOn",
-                table: "Books",
+                table: "AspNetUsers",
                 nullable: true);
         }
 
@@ -22,11 +22,11 @@ namespace BookStoreMvc.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "CreatedOn",
-                table: "Books");
+                table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
                 name: "UpdatedOn",
-                table: "Books");
+                table: "AspNetUsers");
         }
     }
 }

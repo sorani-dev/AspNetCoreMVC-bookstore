@@ -2,16 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookStoreMvc.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("admin")] //[Route("admin/[controller]/[action]")]
-    [Authorize(Roles =("Admin"))]
+    [Authorize(Roles = ("Admin"))]
     public class HomeController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;

@@ -2,10 +2,7 @@
 using BookStoreMvc.Repository;
 using BookStoreMvc.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BookStoreMvc.Controllers
 {

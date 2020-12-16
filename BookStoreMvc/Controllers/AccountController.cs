@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -33,7 +32,7 @@ namespace BookStoreMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await accountRepository.CreateUserAsync(model); 
+                var result = await accountRepository.CreateUserAsync(model);
                 if (!result.Succeeded)
                 {
                     foreach (var errorMessage in result.Errors)

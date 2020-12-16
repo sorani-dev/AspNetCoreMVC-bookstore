@@ -1,10 +1,5 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookStoreMvc.Controllers
 {
@@ -52,7 +47,7 @@ namespace BookStoreMvc.Controllers
                 originalPath = HttpContext.Items["originalPath"] as string;
             }
             ViewBag.originalPath = originalPath;
-            
+
             //_telemetryClient.TrackEvent("Error.PageNotFound", new Dictionary<string, string>
             //{
             //    ["originalPath"] = originalPath

@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookStoreMvc.Models
 {
@@ -14,5 +10,7 @@ namespace BookStoreMvc.Models
         public DateTime? DateOfBirth { get; set; }
         public byte[] ProfilePicture { get; set; }
         public string ProfilePicturePath { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
     }
 }

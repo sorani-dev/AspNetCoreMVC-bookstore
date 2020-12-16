@@ -1,0 +1,28 @@
+﻿@model BookStoreMvc.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "DeleteAsync";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container col-md-4 offset-4">
+    <h3>Delete user</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    
+        <form asp-action="Delete">
+            <input type="hidden" value="@Model.Id" name="id" />
+            <p>Do you really want to delete this user ?</p>
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+</div>

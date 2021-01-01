@@ -4,7 +4,6 @@ using BookStoreMvc.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -153,7 +152,7 @@ namespace BookStoreMvc.Areas.Admin.Controllers
             {
                 if (!string.IsNullOrEmpty(model.Email) && model.Email != user.Email)
                     user.Email = model.Email;
-                if (!string.IsNullOrEmpty(model.UserName) && model.UserName!= user.UserName)
+                if (!string.IsNullOrEmpty(model.UserName) && model.UserName != user.UserName)
                     user.Email = model.Email;
                 //else
                 //    ModelState.AddModelError("", "Email cannot be empty");

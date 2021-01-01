@@ -3,7 +3,9 @@ using BookStoreMvc.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
@@ -223,13 +225,14 @@ namespace BookStoreMvc.Controllers
         [HttpGet("user-details")]
         public async Task<IActionResult> PersonalDetails()
         {
-            var uid = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            UserInfoDetailsModel model = new UserInfoDetailsModel
+            var user = User.FindFirst(ClaimTypes.NameIdentifier);
+            string uid = null;
+            if (user != null)
             {
-                Id = uid
-            };
-            model = await accountRepository.GetUserInfoAsync(model);
+                uid = user.Value;
+            }
+
+            UserInfoDetailsModel model = await GetPersonalDetails(uid);
             return View(model);
         }
 
@@ -238,24 +241,41 @@ namespace BookStoreMvc.Controllers
         {
             var uid = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            UserInfoDetailsModel model = new UserInfoDetailsModel
-            {
-                Id = uid
-            };
-            model = await accountRepository.GetUserInfoAsync(model);
+            UserInfoDetailsModel model = await GetPersonalDetails(uid);
             return View(model);
         }
+
 
         [HttpPost("user-details/edit")]
         public async Task<IActionResult> EditPersonalDetails(UserInfoDetailsModel model)
         {
+            var extensions = new List<string>(new string[] { "jpg", "jpeg", "png", "gif" });
             if (Request.Form.Files.Count > 0)
             {
                 IFormFile file = Request.Form.Files.FirstOrDefault();
-                using (var dataStream = new MemoryStream())
+                if (file.Length < 0)
                 {
-                    await file.CopyToAsync(dataStream);
-                    model.ProfilePicture = dataStream.ToArray();
+                    ModelState.AddModelError("ProfilePicture", "File cannot be empty.");
+                }
+                if (file.ContentType.IndexOf("image", StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    ModelState.AddModelError("ProfilePicture", "This file is not an image");
+                }
+                if (!extensions.Any(ext => file.ContentType.EndsWith(ext)))
+                {
+                    ModelState.AddModelError("ProfilePicture", "This image must be in one of the following format: " + string.Join(",", extensions));
+                }
+                if (ModelState.ErrorCount > 0)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    using (var dataStream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(dataStream);
+                        model.ProfilePicture = dataStream.ToArray();
+                    }
                 }
             }
             var result = await accountRepository.SaveUserInfoAsync(model);
@@ -265,6 +285,16 @@ namespace BookStoreMvc.Controllers
                 return RedirectToAction("PersonalDetails", "Account");
             }
             return View(model);
+        }
+
+        private async Task<UserInfoDetailsModel> GetPersonalDetails(string uid)
+        {
+            UserInfoDetailsModel model = new UserInfoDetailsModel
+            {
+                Id = uid
+            };
+            model = await accountRepository.GetUserInfoAsync(model);
+            return model;
         }
     }
 }

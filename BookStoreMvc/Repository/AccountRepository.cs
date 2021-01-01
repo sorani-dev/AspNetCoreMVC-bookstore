@@ -44,11 +44,11 @@ namespace BookStoreMvc.Repository
         {
             var user = new ApplicationUser()
             {
-                FirstName = userModel.LastName,
+                FirstName = userModel.FirstName,
                 LastName = userModel.LastName,
                 Email = userModel.Email,
                 UserName = userModel.Email,
-                DateOfBirth = userModel.DateOfBirth,
+                //DateOfBirth = userModel.DateOfBirth,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
             };

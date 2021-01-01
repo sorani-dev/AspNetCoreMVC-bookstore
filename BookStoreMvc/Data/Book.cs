@@ -31,5 +31,7 @@ namespace BookStoreMvc.Data
         public Language Language { get; set; }
 
         public ICollection<BookGallery> bookGallery { get; set; }
+
+        public ICollection<BookCategory> bookCategories { get; set; }
     }
 }

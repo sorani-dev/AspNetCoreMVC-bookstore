@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20201211225231_AddApplicationUser.Designer.cs" />
     <Compile Remove="Migrations\20201215094904_AddProfilePictureToUser.cs" />
     <Compile Remove="Migrations\20201215094904_AddProfilePictureToUser.Designer.cs" />
+    <Compile Remove="Migrations\20210101162608_AddManyToManyCategoryToBook.cs" />
+    <Compile Remove="Migrations\20210101162608_AddManyToManyCategoryToBook.Designer.cs" />
+    <Compile Remove="Migrations\20210101163604_AddManyToManyCategoryToBook.cs" />
+    <Compile Remove="Migrations\20210101163604_AddManyToManyCategoryToBook.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

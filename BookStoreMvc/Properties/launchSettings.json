@@ -15,6 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
+    "IIS Express Dev": {
+      "commandName": "IISExpress",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "BookStoreMvc": {
       "commandName": "Project",
       "launchBrowser": true,

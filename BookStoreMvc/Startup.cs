@@ -91,6 +91,19 @@ namespace BookStoreMvc
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", configuration.GetSection("ThirdPartyBookAlert"));
             services.Configure<SMTPConfigModel>(configuration.GetSection("SMTPConfig"));
 
+            //services.AddHsts(options =>
+            //{
+            //    options.Preload = true;
+            //    options.IncludeSubDomains = true;
+            //    options.MaxAge = TimeSpan.FromDays(60);
+            //    //options.ExcludedHosts.Add("example.com");
+            //    //options.ExcludedHosts.Add("www.example.com");
+            //});
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
+            //    options.HttpsPort = 443;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,7 +118,7 @@ namespace BookStoreMvc
             else
             {
                 app.UseExceptionHandler("/Error");
-                //app.UseHsts();
+                app.UseHsts();
                 app.Use(async (ctx, next) =>
                 {
                     await next();

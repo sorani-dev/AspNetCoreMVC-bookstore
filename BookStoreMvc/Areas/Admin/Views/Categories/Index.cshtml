@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BookStoreMvc.Data.Category>
+
+@{
+    ViewData["Title"] = "Manage Categories";
+}
+<div class="container">
+<h1>Manage Categories / Genres</h1>
+
+<p>
+    <a class="btn btn-primary float-right" asp-action="Create">Create a new Category</a>
+</p>
+<table class="table table-borderless table-responsive-md table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td class="d-flex">
+                <a class="btn btn-secondary mx-2" asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> 
+                <a class="btn btn-success mr-2" asp-action="Details" asp-route-id="@item.CategoryId">Details</a> 
+                <form class="inline" asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@item.CategoryId" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

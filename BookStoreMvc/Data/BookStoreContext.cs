@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using BookStoreMvc.Data;
 
 namespace BookStoreMvc.Data
 {
@@ -260,5 +261,9 @@ namespace BookStoreMvc.Data
                 .HasForeignKey(bc => bc.CategoryId);
 
         }
+
+        public DbSet<BookStoreMvc.Data.Category> Category { get; set; }
+
+        public DbSet<BookStoreMvc.Models.CategoryModel> CategoryModel { get; set; }
     }
 }

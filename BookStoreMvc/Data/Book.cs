@@ -33,5 +33,9 @@ namespace BookStoreMvc.Data
         public ICollection<BookGallery> bookGallery { get; set; }
 
         public ICollection<BookCategory> bookCategories { get; set; }
+
+        public ICollection<BookGenre> BookGenres { get; set; }
+
+        public ICollection<BookAuthor> bookAuthors { get; set; }
     }
 }

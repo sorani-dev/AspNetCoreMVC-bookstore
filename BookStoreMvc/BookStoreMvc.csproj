@@ -13,6 +13,18 @@
     <Compile Remove="Migrations\20210101162608_AddManyToManyCategoryToBook.Designer.cs" />
     <Compile Remove="Migrations\20210101163604_AddManyToManyCategoryToBook.cs" />
     <Compile Remove="Migrations\20210101163604_AddManyToManyCategoryToBook.Designer.cs" />
+    <Compile Remove="Migrations\20210102165157_AddManyToManyGenreToBooks.cs" />
+    <Compile Remove="Migrations\20210102165157_AddManyToManyGenreToBooks.Designer.cs" />
+    <Compile Remove="Migrations\20210102170524_AddManyToManyGenreToBooks.cs" />
+    <Compile Remove="Migrations\20210102170524_AddManyToManyGenreToBooks.Designer.cs" />
+    <Compile Remove="Migrations\20210102184140_UpdateColumnsToAuthor.cs" />
+    <Compile Remove="Migrations\20210102184140_UpdateColumnsToAuthor.Designer.cs" />
+    <Compile Remove="Migrations\20210102184314_UpdateColumnsToAuthor.cs" />
+    <Compile Remove="Migrations\20210102184314_UpdateColumnsToAuthor.Designer.cs" />
+    <Compile Remove="Migrations\20210102184440_UpdateColumnsToAuthor.cs" />
+    <Compile Remove="Migrations\20210102184440_UpdateColumnsToAuthor.Designer.cs" />
+    <Compile Remove="Migrations\20210102185254_UpdateColumnsToAuthor.cs" />
+    <Compile Remove="Migrations\20210102185254_UpdateColumnsToAuthor.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

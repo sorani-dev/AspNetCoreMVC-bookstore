@@ -47,7 +47,37 @@ namespace BookStoreMvc.Repository
             }
 
             await _context.Books.AddAsync(newBook);
+
+            foreach (var author in model.Authors)
+            {
+                var newAuthor = new BookAuthor()
+                {
+                    BookId = newBook.Id,
+                    AuthorId = author.Id
+                };
+                await _context.AddAsync(newAuthor);
+            }
+            foreach (var genre in model.Genre)
+            {
+                var newGenre = new BookGenre()
+                {
+                    BookId = newBook.Id,
+                    GenreId = genre.Id
+                };
+                await _context.AddAsync(newGenre);
+            }
+            foreach (var category in model.Categories)
+            {
+                var newBookCategory = new BookCategory()
+                {
+                    BookId = newBook.Id,
+                    CategoryId = category.Id
+                };
+                await _context.AddAsync(newBookCategory);
+            }
+
             await _context.SaveChangesAsync();
+
 
             return newBook.Id;
         }

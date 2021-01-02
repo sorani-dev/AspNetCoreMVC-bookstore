@@ -51,5 +51,13 @@ namespace BookStoreMvc.Models
         public IFormFile BookPdf { get; set; }
 
         public string BookPdfUrl { get; set; }
+
+        //[Display(Name = "Book categories")]
+        public List<CategoryModel> Categories { get; set; }
+
+        public List<GenreModel> Genre { get; set; }
+
+        [Required(ErrorMessage = "Please enter the author(s) of your book")]
+        public List<AuthorModel> Authors { get; set; }
     }
 }

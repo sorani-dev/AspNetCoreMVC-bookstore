@@ -260,10 +260,21 @@ namespace BookStoreMvc.Data
                 .WithMany(b => b.BookCategories)
                 .HasForeignKey(bc => bc.CategoryId);
 
+            builder.Entity<BookGenre>()
+                .HasKey(bg => new { bg.BookId, bg.GenreId });
+
+            builder.Entity<BookAuthor>()
+                .HasKey(ba => new { ba.BookId, ba.AuthorId });
         }
 
         public DbSet<BookStoreMvc.Data.Category> Category { get; set; }
 
-        public DbSet<BookStoreMvc.Models.CategoryModel> CategoryModel { get; set; }
+        //public DbSet<BookStoreMvc.Models.CategoryModel> CategoryModel { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<BookGenre> BookGenres { get; set; }
+
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<BookAuthor> BookAuthors { get; set; }
     }
 }

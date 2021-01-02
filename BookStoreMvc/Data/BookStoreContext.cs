@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using BookStoreMvc.Data;
 
 namespace BookStoreMvc.Data
 {
@@ -163,6 +162,7 @@ namespace BookStoreMvc.Data
             return base.GetHashCode();
         }
 
+        [Obsolete]
         public override DbQuery<TQuery> Query<TQuery>()
         {
             return base.Query<TQuery>();

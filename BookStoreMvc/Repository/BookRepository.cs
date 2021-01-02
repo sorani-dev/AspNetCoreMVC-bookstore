@@ -48,32 +48,41 @@ namespace BookStoreMvc.Repository
 
             await _context.Books.AddAsync(newBook);
 
-            foreach (var author in model.Authors)
+            if (model.Authors != null)
             {
-                var newAuthor = new BookAuthor()
+                foreach (var author in model.Authors)
                 {
-                    BookId = newBook.Id,
-                    AuthorId = author.Id
-                };
-                await _context.AddAsync(newAuthor);
+                    var newAuthor = new BookAuthor()
+                    {
+                        BookId = newBook.Id,
+                        AuthorId = author.Id
+                    };
+                    await _context.AddAsync(newAuthor);
+                }
             }
-            foreach (var genre in model.Genre)
+            if (model.Genre != null)
             {
-                var newGenre = new BookGenre()
+                foreach (var genre in model.Genre)
                 {
-                    BookId = newBook.Id,
-                    GenreId = genre.Id
-                };
-                await _context.AddAsync(newGenre);
+                    var newGenre = new BookGenre()
+                    {
+                        BookId = newBook.Id,
+                        GenreId = genre.Id
+                    };
+                    await _context.AddAsync(newGenre);
+                }
             }
-            foreach (var category in model.Categories)
+            if (model.Categories != null)
             {
-                var newBookCategory = new BookCategory()
+                foreach (var category in model.Categories)
                 {
-                    BookId = newBook.Id,
-                    CategoryId = category.Id
-                };
-                await _context.AddAsync(newBookCategory);
+                    var newBookCategory = new BookCategory()
+                    {
+                        BookId = newBook.Id,
+                        CategoryId = category.Id
+                    };
+                    await _context.AddAsync(newBookCategory);
+                }
             }
 
             await _context.SaveChangesAsync();

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BookStoreMvc.Data.Author>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+<h1>Manage Authors</h1>
+
+<p>
+    <a asp-action="Create">Create a new author</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td  class="d-flex">
+                <a class="btn btn-secondary mx-2" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-info mr-2" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <form asp-action="Delete" type="post">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

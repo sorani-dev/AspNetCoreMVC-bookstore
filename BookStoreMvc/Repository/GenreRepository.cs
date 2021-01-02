@@ -3,6 +3,7 @@ using BookStoreMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace BookStoreMvc.Repository
             return await context.Genres.Select(x => new GenreModel()
             {
                 Id = x.Id,
-                Name = x.Name
+                Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x.Name)
             }).ToListAsync();
         }
     }
